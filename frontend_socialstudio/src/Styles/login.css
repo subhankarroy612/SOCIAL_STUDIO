@@ -1,0 +1,21 @@
+#login {
+    display: flex;
+}
+
+#login>div {
+    width: 50%;
+}
+
+#loginForm{
+    width: 60%;
+    margin: auto;
+    margin-top: 30vh;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#loginImg>img{
+    height: 100vh;
+}

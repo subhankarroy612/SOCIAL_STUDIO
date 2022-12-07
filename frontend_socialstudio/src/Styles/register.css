@@ -1,0 +1,22 @@
+#register{
+    text-align: center;
+    margin-top: 14vh;
+
+}
+
+#register>div{
+    width: 33%;
+    margin: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#registerHead{
+    color: #00a0dc;
+}
+
+.label{
+    margin-top: 1vh;
+}
+

@@ -14,12 +14,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
 import { register } from '../Redux/authReducer/actions';
-// import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 const Register = () => {
     const dispatch = useDispatch()
     const { registerState } = useSelector((store) => store.auth)
 
+    const [error, setError] = useState(false)
     const [details, setDetails] = useState({
         firstName: '',
         lastName: '',
@@ -38,12 +39,14 @@ const Register = () => {
     const handleClick = () => {
         if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && details.avatar) {
             dispatch(register(details))
+        }else{
+            setError(true)
         }
     }
 
-    // if (registerState) {
-    //     return <Navigate to='/login' />
-    // }
+    if (registerState) {
+        return <Navigate to='/login' />
+    }
 
 
     return (
@@ -56,6 +59,12 @@ const Register = () => {
                     registerState === 'Signup Successful' || registerState === "" ? "" : <Alert status='error'>
                         <AlertIcon />
                         <AlertTitle>User already exists!</AlertTitle>
+                    </Alert>
+                }
+                {
+                    error && <Alert status='error'>
+                        <AlertIcon />
+                        <AlertTitle>Please fill all the details!</AlertTitle>
                     </Alert>
                 }
 

@@ -10,6 +10,11 @@ app.get('/', (req, res) => res.send('Users Route!'))
 app.post('/register', async (req, res) => {
     const { firstName, lastName, location, occupation, email, avatar, password } = req.body;
     try {
+        let existingUser = await userModel.findOne({ email })
+
+        if (existingUser) {
+            return res.send('User already exists')
+        }
 
         const newUser = userModel({ firstName, lastName, location, occupation, email, avatar, password })
         await newUser.save()
@@ -31,7 +36,7 @@ app.post('/login', async (req, res) => {
         if (existingUser) {
             let token = jwt.sign({ _id: existingUser._id, email, role: existingUser.role }, process.env.TOKEN, { expiresIn: '7d' });
             return res.send({ message: 'Login Successful', token })
-        }else{
+        } else {
             return res.send('Wrong Credentials')
         }
     } catch (e) {

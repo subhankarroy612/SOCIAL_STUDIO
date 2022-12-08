@@ -34,8 +34,6 @@ const Login = () => {
     if(isAuth)
     return <Navigate to='/' />
 
-    console.log(error);
-
     return (
         <div id='login'>
 

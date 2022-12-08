@@ -14,13 +14,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
 import { register } from '../Redux/authReducer/actions';
-import { Navigate } from 'react-router-dom'
 
 const Register = () => {
     const dispatch = useDispatch()
-    const { registerState } = useSelector((store) => store.auth)
-
+    const { registerState, regState } = useSelector((store) => store.auth)
     const [error, setError] = useState(false)
+
     const [details, setDetails] = useState({
         firstName: '',
         lastName: '',
@@ -38,16 +37,12 @@ const Register = () => {
 
     const handleClick = () => {
         if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && details.avatar) {
+            setError(false)
             dispatch(register(details))
-        }else{
+        } else {
             setError(true)
         }
     }
-
-    if (registerState) {
-        return <Navigate to='/login' />
-    }
-
 
     return (
         <div id='register'>
@@ -56,13 +51,20 @@ const Register = () => {
                 <Text id='registerHead' as='b' >Welcome to SOCIAL STUDIO</Text>
 
                 {
-                    registerState === 'Signup Successful' || registerState === "" ? "" : <Alert status='error'>
+                    regState && <Alert style={{ borderRadius: '20px', height: '40px' }} status='success'>
+                        <AlertIcon />
+                        Signed up Successfully!
+                    </Alert>
+                }
+
+                {
+                    registerState === 'Signup Successful' || registerState === "" ? "" : <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
                         <AlertIcon />
                         <AlertTitle>User already exists!</AlertTitle>
                     </Alert>
                 }
                 {
-                    error && <Alert status='error'>
+                    error && <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
                         <AlertIcon />
                         <AlertTitle>Please fill all the details!</AlertTitle>
                     </Alert>

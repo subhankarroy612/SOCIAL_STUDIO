@@ -9,8 +9,7 @@ import { Navigate } from 'react-router-dom';
 const Login = () => {
 
     const dispatch = useDispatch()
-    const { isAuth, token } = useSelector(store => store.auth)
-    const [error, setError] = useState(false)
+    const { isAuth, token, logState } = useSelector(store => store.auth)
 
     let [details, setDetails] = useState({
         email: '',
@@ -26,8 +25,6 @@ const Login = () => {
         dispatch(login(details))
         if (isAuth) {
             localStorage.setItem('authToken', token)
-        }else{
-            setError(!error)
         }
     }
     
@@ -41,7 +38,7 @@ const Login = () => {
                 <div id='loginForm'>
                     <Text id='registerHead' as='b' >Sign in to your account</Text>
                     {
-                        error && <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
+                        logState && <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
                             <AlertIcon />
                             <AlertTitle>Wrong Credentials</AlertTitle>
                         </Alert>

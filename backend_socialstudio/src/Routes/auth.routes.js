@@ -35,7 +35,7 @@ app.post('/login', async (req, res) => {
 
         if (existingUser) {
             let token = jwt.sign({ _id: existingUser._id, email, role: existingUser.role }, process.env.TOKEN, { expiresIn: '7d' });
-            return res.send({ message: 'Login Successful', token, avatar: existingUser.avatar, name: existingUser.firstName + existingUser.lastName, location: existingUser.location ,occupation: existingUser.occupation, email: existingUser.email })
+            return res.send({ message: 'Login Successful', token, avatar: existingUser.avatar, name: existingUser.firstName + existingUser.lastName, location: existingUser.location, occupation: existingUser.occupation, email: existingUser.email })
         } else {
             return res.send('Wrong Credentials')
         }
@@ -43,5 +43,19 @@ app.post('/login', async (req, res) => {
         return res.send(e.message)
     }
 })
+
+app.post('/userDetails', async (req, res) => {
+    const { token } = req.body
+    try {
+        let verification = jwt.verify(token, process.env.TOKEN);
+        if (verification) {
+            let findUser = await userModel.findOne({ email: verification.email })
+            return res.send(findUser)
+        }
+    } catch (e) {
+        return res.send(e.message)
+    }
+})
+
 
 module.exports = app;

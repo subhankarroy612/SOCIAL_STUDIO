@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER } from "./actionTypes";
+import { LOGIN, LOGOUT, REGISTER, USERDETAILS } from "./actionTypes";
 
 const initState = {
     count: 0,
@@ -24,13 +24,16 @@ export const authReducer = (state = initState, action) => {
                 ...state, token: action.payload,
                 logState: action.payload === 'Wrong Credentials' ? true : false,
                 isAuth: action.payload === 'Wrong Credentials' ? false : true,
-                userDetails: action.userDetails
             }
         case LOGOUT:
             localStorage.removeItem('authToken')
             return {
                 ...state, isAuth: false, userDetails: []
             }
+        case USERDETAILS:
+            return {
+                ...state, userDetails: action.payload
+            }    
         default:
             return state;
     }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { REGISTER, LOGIN, LOGOUT } from './actionTypes';
+import { REGISTER, LOGIN, LOGOUT, USERDETAILS } from './actionTypes';
 
 export const register = (details) => async (dispatch) => {
     let res = await axios.post('http://localhost:8000/auth/register', details);
@@ -12,6 +12,11 @@ export const login = (details) => async (dispatch) => {
         dispatch({ type: LOGIN, payload: res.data.token, userDetails: [res.data.avatar, res.data.email, res.data.occupation, res.data.name, res.data.location] })
     else
         dispatch({ type: LOGIN, payload: res.data })
+}
+
+export const getUserDetails = (token) => async (dispatch) => {
+    let res = await axios.post('http://localhost:8000/auth/userDetails', { token });
+    dispatch({ type: USERDETAILS, payload: res.data })
 }
 
 export const logout = () => {

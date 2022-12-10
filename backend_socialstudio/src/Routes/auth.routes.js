@@ -35,7 +35,7 @@ app.post('/login', async (req, res) => {
 
         if (existingUser) {
             let token = jwt.sign({ _id: existingUser._id, email, role: existingUser.role }, process.env.TOKEN, { expiresIn: '7d' });
-            return res.send({ message: 'Login Successful', token })
+            return res.send({ message: 'Login Successful', token, avatar: existingUser.avatar, name: existingUser.firstName + existingUser.lastName, location: existingUser.location ,occupation: existingUser.occupation, email: existingUser.email })
         } else {
             return res.send('Wrong Credentials')
         }

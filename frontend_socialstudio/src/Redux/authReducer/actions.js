@@ -8,11 +8,10 @@ export const register = (details) => async (dispatch) => {
 
 export const login = (details) => async (dispatch) => {
     let res = await axios.post('http://localhost:8000/auth/login', details);
-    
-    if(res.data.token)
-    dispatch({ type: LOGIN, payload: res.data.token })
+    if (res.data.token)
+        dispatch({ type: LOGIN, payload: res.data.token, userDetails: [res.data.avatar, res.data.email, res.data.occupation, res.data.name, res.data.location] })
     else
-    dispatch({type: LOGIN, payload: res.data})
+        dispatch({ type: LOGIN, payload: res.data })
 }
 
 export const logout = () => {

@@ -7,6 +7,7 @@ const initState = {
     logState: false,
     token: localStorage.getItem('authToken'),
     isAuth: !!localStorage.getItem('authToken'),
+    userDetails: [],
 }
 
 export const authReducer = (state = initState, action) => {
@@ -22,12 +23,13 @@ export const authReducer = (state = initState, action) => {
             return {
                 ...state, token: action.payload,
                 logState: action.payload === 'Wrong Credentials' ? true : false,
-                isAuth: action.payload === 'Wrong Credentials' ? false : true
+                isAuth: action.payload === 'Wrong Credentials' ? false : true,
+                userDetails: action.userDetails
             }
         case LOGOUT:
             localStorage.removeItem('authToken')
             return {
-                ...state, isAuth: false,
+                ...state, isAuth: false, userDetails: []
             }
         default:
             return state;

@@ -1,0 +1,50 @@
+#home {
+    margin-top: 10vh;
+    background-color: #dadada;
+    height: 1000vh;
+}
+
+.hr{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#home>div {
+    background-color: #dadada;
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 25% 40% 25%;
+    gap: 3vw;
+    padding-top: 4vh;
+}
+
+#userDetails {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    color: #bbbbbb;
+}
+
+#userDetails>div>img{
+    border-radius: 50%;
+    width: 70px;
+}
+
+#userDetails>div{
+display: flex;
+align-items: center;  
+}
+
+#posts {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+
+}
+
+#friendList {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}

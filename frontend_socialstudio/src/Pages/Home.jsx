@@ -14,6 +14,8 @@ import {
 
 const Home = () => {
 
+    //create a component to map alll the posts.
+
     const { userDetails, token } = useSelector(store => store.auth)
     const dispatch = useDispatch()
 

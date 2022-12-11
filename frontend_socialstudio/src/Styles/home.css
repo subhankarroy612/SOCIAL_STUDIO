@@ -4,7 +4,7 @@
     height: 1000vh;
 }
 
-.hr{
+.hr {
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
@@ -24,27 +24,87 @@
     border-radius: 8px;
     padding: 20px;
     color: #bbbbbb;
+    height: 350px;
 }
 
-#userDetails>div>img{
+.profilePic {
     border-radius: 50%;
     width: 70px;
 }
 
-#userDetails>div{
-display: flex;
-align-items: center;  
+.userAlign {
+    display: flex;
+    align-items: center;
 }
 
+#userDetails>div>p {
+    padding-left: 1vw;
+}
+
+#socialProfiles {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: flex-start;
+}
+
+.svj {
+    color: black;
+}
+
+#socialProfiles>div {
+    display: flex;
+    align-items: center;
+}
+
+#socialProfiles>div>p {
+    margin-left: 1vw;
+}
+
+
 #posts {
+    /* background-color: #dadada; */
+    /* border-radius: 8px; */
+}
+
+#postDiv {
+    height: 160px;
     background-color: white;
     border-radius: 8px;
     padding: 20px;
+}
+
+#postBtn{
+    display: flex;
+    justify-content: space-between;
+}
+
+#newsFeed {
+    
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 4vh;
 
 }
+
+
+#postInput {
+    display: flex;
+    align-items: center;
+}
+
+#postInput>input {
+    margin-left: 2vw;
+    padding-left: 2vw;
+    border-radius: 50px;
+    height: 50px;
+}
+
 
 #friendList {
     background-color: white;
     border-radius: 8px;
     padding: 20px;
+    height: 350px;
 }

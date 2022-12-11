@@ -11,17 +11,23 @@ import {
     Input,
     Button
 } from '@chakra-ui/react'
+import { getPosts } from '../Redux/homeReducer/actions';
 
 const Home = () => {
 
     //create a component to map alll the posts.
 
     const { userDetails, token } = useSelector(store => store.auth)
+    const { allPosts } = useSelector(store => store.home)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getUserDetails(token))
-    }, [dispatch, token]);
+        dispatch(getPosts())
+    }, [dispatch,token]);
+
+    console.log(allPosts);
 
     return (
         <div id='home'>
@@ -36,7 +42,7 @@ const Home = () => {
                     <hr className='hr' />
 
                     <div className='userAlign'>
-                        <MdLocationOn className='svj' />
+                        <MdLocationOn color='red' className='svj' />
                         <p> {userDetails.location}</p>
                     </div>
                     <div className='userAlign'>
@@ -49,11 +55,11 @@ const Home = () => {
                     <div id='socialProfiles'>
                         <h3 style={{ fontWeight: 'bold', color: 'black' }}>Social Profiles</h3>
                         <div>
-                            <BsTwitter className='svj' />
+                            <BsTwitter color='#1da1f2' className='svj' />
                             <p>Twitter</p>
                         </div>
                         <div>
-                            <BsLinkedin className='svj' />
+                            <BsLinkedin color='#1da1f2' className='svj' />
                             <p>Linkedin</p>
                         </div>
                     </div>
@@ -79,9 +85,14 @@ const Home = () => {
                     </div>
 
                     <div id='newsFeed'>
-                        <p>adasdd</p>
-                        <p>adasdd</p>
-                        <p>adasdd</p>
+                        {
+                            allPosts.map((ele)=>{
+                                return <div>
+                                    <img src={ele.picture} alt="postPic" />
+                                </div>
+
+                            })
+                        }
                     </div>
 
                 </div>

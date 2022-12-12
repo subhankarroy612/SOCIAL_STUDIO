@@ -1,7 +1,6 @@
 #home {
     margin-top: 10vh;
     background-color: #dadada;
-    height: 1000vh;
 }
 
 .hr {
@@ -71,16 +70,15 @@
     padding: 20px;
 }
 
-#postBtn{
+#postBtn {
     display: flex;
     justify-content: space-between;
 }
 
 #newsFeed {
-    
-    background-color: white;
+
+    background-color: #dadada;
     border-radius: 8px;
-    padding: 20px;
     margin-top: 4vh;
 
 }
@@ -98,6 +96,28 @@
     height: 50px;
 }
 
+#postsCard {
+    border-radius: 8px;
+    margin-top: 4vh;
+    padding: 20px;
+    background-color: white;
+}
+
+.cardChild {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+
+.cardChild>img {
+    width: 50px;
+}
+
+.mainDiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: centers;
+}
 
 #friendList {
     background-color: white;

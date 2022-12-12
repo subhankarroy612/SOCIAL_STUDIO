@@ -7,9 +7,11 @@ import { RiSuitcaseFill } from 'react-icons/ri'
 import { BsTwitter } from 'react-icons/bs'
 import { BsLinkedin } from 'react-icons/bs'
 import { FiImage } from 'react-icons/fi'
+import { AiOutlineUserAdd } from 'react-icons/ai'
 import {
     Input,
-    Button
+    Button,
+    Text
 } from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
 
@@ -25,9 +27,8 @@ const Home = () => {
     useEffect(() => {
         dispatch(getUserDetails(token))
         dispatch(getPosts())
-    }, [dispatch,token]);
+    }, [dispatch, token]);
 
-    console.log(allPosts);
 
     return (
         <div id='home'>
@@ -84,11 +85,25 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div id='newsFeed'>
+                    <div id='newsFeed' >
                         {
-                            allPosts.map((ele)=>{
-                                return <div>
-                                    <img src={ele.picture} alt="postPic" />
+                            allPosts.map((ele, i) => {
+                                return <div id='postsCard' key={i}>
+                                    <div className='mainDiv'>
+                                        <div className='cardChild'>
+                                            <img className='profilePic' src={ele.imageUrl} alt="userImg" />
+                                            <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.name}</Text>
+                                        </div>
+
+                                        {
+                                           ele.user !== userDetails._id?
+                                            <AiOutlineUserAdd>haba</AiOutlineUserAdd>:''
+                                        }
+
+
+                                    </div>
+                                    <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
+                                    <img style={{ borderRadius: '8px', width:'100%' }} src={ele.picture} alt="postPic" />
                                 </div>
 
                             })

@@ -14,6 +14,7 @@ import {
     Text
 } from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
+import { useState } from 'react';
 
 const Home = () => {
 
@@ -21,6 +22,7 @@ const Home = () => {
 
     const { userDetails, token } = useSelector(store => store.auth)
     const { allPosts } = useSelector(store => store.home)
+    const [file, setFile] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -74,8 +76,13 @@ const Home = () => {
                             <Input size='sm' placeholder={"What's on your mind.."} />
                         </div>
                         <hr className='hr' />
+                        {
+                          file && <Input type="file" />
+
+                        }
+
                         <div id='postBtn'>
-                            <Button size='sm' colorScheme='teal' variant='ghost'>
+                            <Button onClick={() => setFile(!file)} size='sm' colorScheme='teal' variant='ghost'>
                                 <FiImage style={{ marginRight: '5px' }} />
                                 Image
                             </Button>
@@ -96,14 +103,14 @@ const Home = () => {
                                         </div>
 
                                         {
-                                           ele.user !== userDetails._id?
-                                            <AiOutlineUserAdd>haba</AiOutlineUserAdd>:''
+                                            ele.user !== userDetails._id ?
+                                                <AiOutlineUserAdd>haba</AiOutlineUserAdd> : ''
                                         }
 
 
                                     </div>
                                     <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
-                                    <img style={{ borderRadius: '8px', width:'100%' }} src={ele.picture} alt="postPic" />
+                                    <img style={{ borderRadius: '8px', width: '100%' }} src={ele.picture} alt="postPic" />
                                 </div>
 
                             })

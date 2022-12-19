@@ -7,7 +7,7 @@ export default function PrivateRoute({children}) {
   const { isAuth } = useSelector(store=>store.auth)
 
   if(!isAuth){
-    return <Navigate to='/login' />
+    // return <Navigate to='/login' />
   }
   
   return children

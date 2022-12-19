@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
 import { useState } from 'react';
+import PostImage from '../Components/PostImage';
 
 const Home = () => {
 
@@ -22,7 +23,6 @@ const Home = () => {
 
     const { userDetails, token } = useSelector(store => store.auth)
     const { allPosts } = useSelector(store => store.home)
-    const [file, setFile] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -30,6 +30,8 @@ const Home = () => {
         dispatch(getUserDetails(token))
         dispatch(getPosts())
     }, [dispatch, token]);
+
+    console.log(userDetails);
 
 
     return (
@@ -70,47 +72,27 @@ const Home = () => {
                 </div>
 
                 <div id='posts'>
-                    <div id='postDiv' >
-                        <div id='postInput' >
-                            <img className='profilePic' src={userDetails.avatar} alt="proPic" />
-                            <Input size='sm' placeholder={"What's on your mind.."} />
-                        </div>
-                        <hr className='hr' />
-                        {
-                          file && <Input type="file" />
 
-                        }
-
-                        <div id='postBtn'>
-                            <Button onClick={() => setFile(!file)} size='sm' colorScheme='teal' variant='ghost'>
-                                <FiImage style={{ marginRight: '5px' }} />
-                                Image
-                            </Button>
-                            <Button size='sm' colorScheme='linkedin' variant='solid'>
-                                POST
-                            </Button>
-                        </div>
-                    </div>
-
+                    <PostImage></PostImage>
                     <div id='newsFeed' >
                         {
                             allPosts.map((ele, i) => {
                                 return <div id='postsCard' key={i}>
                                     <div className='mainDiv'>
                                         <div className='cardChild'>
-                                            <img className='profilePic' src={ele.imageUrl} alt="userImg" />
-                                            <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.name}</Text>
+                                            <img className='profilePic' src={ele.user.avatar} alt="userImg" />
+                                            <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text>
                                         </div>
 
                                         {
-                                            ele.user !== userDetails._id ?
+                                            ele.user._id !== userDetails._id ?
                                                 <AiOutlineUserAdd>haba</AiOutlineUserAdd> : ''
                                         }
 
 
                                     </div>
                                     <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
-                                    <img style={{ borderRadius: '8px', width: '100%' }} src={ele.picture} alt="postPic" />
+                                    <img style={{ borderRadius: '8px', width: '100%' }} src={ele.imageUrl} alt="" />
                                 </div>
 
                             })
@@ -125,7 +107,7 @@ const Home = () => {
             </div>
 
         </div>
-    );
+    )
 }
 
 export default Home;

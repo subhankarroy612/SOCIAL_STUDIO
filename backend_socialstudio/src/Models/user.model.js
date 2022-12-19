@@ -17,6 +17,5 @@ const userSchema = new Schema({
 
 const userModel = model('users', userSchema);
 
-userModel.find().then(r=>console.log(r));
 
 module.exports = userModel;

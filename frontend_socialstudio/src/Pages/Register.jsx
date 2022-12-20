@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
 import { register } from '../Redux/authReducer/actions';
+import { AiTwotoneCamera } from 'react-icons/ai'
 
 const Register = () => {
     const dispatch = useDispatch()
@@ -39,8 +40,8 @@ const Register = () => {
         if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && file) {
             setError(false)
             let fm = new FormData()
-            fm.append('file',file)
-            fm.append('upload_preset','social')
+            fm.append('file', file)
+            fm.append('upload_preset', 'social')
             dispatch(register(details, fm))
         } else {
             setError(true)
@@ -98,11 +99,12 @@ const Register = () => {
                     <Input name='occupation' onChange={handleChange} size='sm' placeholder='Occupation' />
 
                     <FormLabel className='label' fontSize='xs'>Upload Picture</FormLabel>
-                    {/* <Input name='avatar' onChange={handleChange}  type='file' size='sm' placeholder='Upload Picture' /> */}
 
-                    <div>
+                    <div style={{border:'1px solid black'}}>
                         <label htmlFor="inputTag">
-                            <i className="fa fa-2x fa-camera">haba</i>
+                            <div style={{display:'flex', justifyContent:'center'}}>
+                            <AiTwotoneCamera style={{}} size='30px' /> Upload
+                            </div>
                             <br />
                             <input onChange={(e) => handleFile(e)} id="inputTag" type="file" />
                             <span color='teal' id="imageName"></span>

@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
 import PostImage from '../Components/PostImage';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -75,7 +76,7 @@ const Home = () => {
                                     <div className='mainDiv'>
                                         <div className='cardChild'>
                                             <img className='profilePic' src={ele.user.avatar} alt="userImg" />
-                                            <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text>
+                                            <Link to={`/singleUser/${ele.user._id}`}> <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text></Link>
                                         </div>
 
                                         {

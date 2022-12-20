@@ -6,6 +6,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { FiImage } from 'react-icons/fi';
 import { setPosts } from '../Redux/homeReducer/actions';
+import '../Styles/home.css'
 
 const PostImage = () => {
 

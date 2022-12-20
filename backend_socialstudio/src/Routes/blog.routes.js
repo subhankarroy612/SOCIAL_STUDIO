@@ -8,7 +8,7 @@ const app = express.Router()
 
 app.get('/allPosts', async (req, res) => {
     try {
-        let allBlogs = await blogModel.find().populate("user")
+        await blogModel.find().populate("user")
             .then(r => res.send(r))
             .catch(e => res.send(e.message));
     } catch (e) {

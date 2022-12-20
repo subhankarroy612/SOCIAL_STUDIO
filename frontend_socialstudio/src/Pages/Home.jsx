@@ -6,15 +6,11 @@ import { MdLocationOn } from 'react-icons/md'
 import { RiSuitcaseFill } from 'react-icons/ri'
 import { BsTwitter } from 'react-icons/bs'
 import { BsLinkedin } from 'react-icons/bs'
-import { FiImage } from 'react-icons/fi'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import {
-    Input,
-    Button,
     Text
 } from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
-import { useState } from 'react';
 import PostImage from '../Components/PostImage';
 
 const Home = () => {
@@ -30,8 +26,6 @@ const Home = () => {
         dispatch(getUserDetails(token))
         dispatch(getPosts())
     }, [dispatch, token]);
-
-    console.log(userDetails);
 
 
     return (

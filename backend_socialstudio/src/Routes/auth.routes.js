@@ -9,6 +9,7 @@ app.get('/', (req, res) => res.send('Users Route!'))
 
 app.post('/register', async (req, res) => {
     const { firstName, lastName, location, occupation, email, avatar, password } = req.body;
+    console.log(req.body);
     try {
         let existingUser = await userModel.findOne({ email })
 

@@ -5,6 +5,7 @@ let url = 'http://localhost:8000/'
 
 export const getPosts = () => async (dispatch) => {
    let res = await axios.get('http://localhost:8000/blogs/allPosts');
+   console.log(res.data);
    dispatch({ type: GETPOSTS, payload: res.data })
 }
 

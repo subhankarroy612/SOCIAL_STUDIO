@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 app.use('/auth', authRoute)
-app.use('/auth/users', usersRoute)
+app.use('/users', usersRoute)
 app.use('/blogs', blogsRoute)
 
 app.get('/', (req, res) => res.send('API Works!'));

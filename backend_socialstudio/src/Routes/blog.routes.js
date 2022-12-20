@@ -1,6 +1,7 @@
 const express = require('express');
 const blogModel = require('../Models/blog.model');
 const jwt = require('jsonwebtoken');
+const AuthMiddleware = require('../Middlewares/AuthMiddleware');
 require('dotenv').config()
 
 const app = express.Router()
@@ -15,23 +16,7 @@ app.get('/allPosts', async (req, res) => {
     }
 });
 
-app.use(async (req, res, next) => {
-    const token = req.headers.token;
-    try {
-        if (token) {
-            let v = jwt.verify(token, process.env.TOKEN);
-            if (v) {
-                req.user = v;
-                next();
-            } else
-                return res.status(401).send("bhago yaha se");
-        } else
-            return res.status(401).send("please provide token");
-    }
-    catch (e) {
-        return res.status(401).send(e.message);
-    }
-})
+app.use(AuthMiddleware)
 
 app.post('/allPosts', async (req, res) => {
     let { description, imageUrl } = req.body;

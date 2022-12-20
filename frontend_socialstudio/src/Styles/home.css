@@ -28,7 +28,10 @@
 
 .profilePic {
     border-radius: 50%;
-    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    min-height: 70px;
+    max-height: 70px;
 }
 
 .userAlign {
@@ -112,10 +115,10 @@
     width: 50px;
 }
 
-.mainDiv{
-  display: flex;
-  justify-content: space-between;
-  align-items: centers;
+.mainDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: centers;
 }
 
 #friendList {

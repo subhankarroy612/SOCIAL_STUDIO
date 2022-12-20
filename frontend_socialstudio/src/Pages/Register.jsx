@@ -41,7 +41,7 @@ const Register = () => {
             let fm = new FormData()
             fm.append('file',file)
             fm.append('upload_preset','social')
-            dispatch(register(details, file))
+            dispatch(register(details, fm))
         } else {
             setError(true)
         }
@@ -98,11 +98,11 @@ const Register = () => {
                     <Input name='occupation' onChange={handleChange} size='sm' placeholder='Occupation' />
 
                     <FormLabel className='label' fontSize='xs'>Upload Picture</FormLabel>
-                    <Input name='avatar' onChange={handleChange} style={{ display: 'none' }} type='file' size='sm' placeholder='Upload Picture' />
+                    {/* <Input name='avatar' onChange={handleChange}  type='file' size='sm' placeholder='Upload Picture' /> */}
 
                     <div>
                         <label htmlFor="inputTag">
-                            <i className="fa fa-2x fa-camera"></i>
+                            <i className="fa fa-2x fa-camera">haba</i>
                             <br />
                             <input onChange={(e) => handleFile(e)} id="inputTag" type="file" />
                             <span color='teal' id="imageName"></span>

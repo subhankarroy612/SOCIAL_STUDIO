@@ -20,3 +20,8 @@
     margin-top: 1vh;
 }
 
+#inputTag{
+    display: none;
+    border: 1px solid black;
+}
+

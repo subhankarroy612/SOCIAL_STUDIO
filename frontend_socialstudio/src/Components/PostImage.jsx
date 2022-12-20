@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import {
     Input,
     Button,
-    Text
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import { FiImage } from 'react-icons/fi';
-import axios from 'axios';
 import { setPosts } from '../Redux/homeReducer/actions';
 
 const PostImage = () => {

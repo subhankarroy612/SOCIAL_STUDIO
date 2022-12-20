@@ -19,6 +19,7 @@ const Register = () => {
     const dispatch = useDispatch()
     const { registerState, regState } = useSelector((store) => store.auth)
     const [error, setError] = useState(false)
+    const [file, setFile] = useState('')
 
     const [details, setDetails] = useState({
         firstName: '',
@@ -27,7 +28,6 @@ const Register = () => {
         password: '',
         location: '',
         occupation: '',
-        avatar: ''
     })
 
     const handleChange = (e) => {
@@ -36,12 +36,20 @@ const Register = () => {
     }
 
     const handleClick = () => {
-        if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && details.avatar) {
+        if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && file) {
             setError(false)
-            dispatch(register(details))
+            let fm = new FormData()
+            fm.append('file',file)
+            fm.append('upload_preset','social')
+            dispatch(register(details, file))
         } else {
             setError(true)
         }
+    }
+
+    const handleFile = (e) => {
+        setFile(e.target.files[0])
+        document.querySelector('#imageName').innerText = e.target.files[0].name
     }
 
     return (
@@ -89,8 +97,17 @@ const Register = () => {
                     <FormLabel className='label' fontSize='xs'>Occupation</FormLabel>
                     <Input name='occupation' onChange={handleChange} size='sm' placeholder='Occupation' />
 
-                    <FormLabel className='label' fontSize='xs'>Image URL</FormLabel>
-                    <Input name='avatar' onChange={handleChange} size='sm' placeholder='Image URL' />
+                    <FormLabel className='label' fontSize='xs'>Upload Picture</FormLabel>
+                    <Input name='avatar' onChange={handleChange} style={{ display: 'none' }} type='file' size='sm' placeholder='Upload Picture' />
+
+                    <div>
+                        <label htmlFor="inputTag">
+                            <i className="fa fa-2x fa-camera"></i>
+                            <br />
+                            <input onChange={(e) => handleFile(e)} id="inputTag" type="file" />
+                            <span color='teal' id="imageName"></span>
+                        </label>
+                    </div>
 
                     <Button onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Register</Button>
                 </FormControl>

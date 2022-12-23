@@ -6,8 +6,8 @@ Goal behind this project was to create a Full Stack Web Application of Social Me
 and all such fetures which is present in a social media.
 </p>
 
-
-*Team
+ 
+* Team
 ___
  <ul>
         <li><a href="https://github.com/1Gireesh"> Girish vishveshvara Bhat</a></li>

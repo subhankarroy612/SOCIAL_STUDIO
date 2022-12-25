@@ -26,13 +26,12 @@ export const setPosts = (fm, obj, token) => async (dispatch) => {
 }
 
 export const getSingleUser = (id, token) => async (dispatch) => {
-
-   let res = await axios.get(url + 'users/' + id, {}, {
-      Headers: {
+   let res = await axios.get(url + 'users/' + id, {
+      headers: {
          token
       }
    })
-   
+   console.log(res.data)
    dispatch({ type: SINGLEUSER, payload: { blogs: res.data.blogs, userDetails: res.data.userDetails } })
 
 }

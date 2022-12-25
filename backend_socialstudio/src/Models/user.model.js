@@ -12,7 +12,8 @@ const userSchema = new Schema({
         type: String,
         enum: ['admin', 'guest'],
         default: 'guest'
-    }
+    },
+    profile: Object
 })
 
 const userModel = model('users', userSchema);

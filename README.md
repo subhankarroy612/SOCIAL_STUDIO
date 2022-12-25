@@ -23,7 +23,6 @@ comfort.
 
 ## Tech Stack
  - ### Frontend 
-   * HTML 5
    * CSS 3
    * JavaScript
    * React JS

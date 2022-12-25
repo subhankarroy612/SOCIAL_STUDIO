@@ -1,0 +1,56 @@
+.profile{
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+.singleUser h1{
+    text-align: center;
+    font-size: 35px;
+}
+.profile>img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%  ;
+}
+.btn{
+    width: 50%;
+    color: white;
+    height: 30px;
+    background-color: teal;
+    border: none;
+    border-radius: 20px;
+}
+.profile>div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.flex{
+    display: flex;
+    gap: 10px;
+}
+.blog{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.blog>div>img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.singleUser>h1{
+    margin: 50px;
+}
+.blog>div{
+    display: flex;
+    margin-left: 30%;
+    gap: 20px;
+    align-items: center;
+}
+.icon{
+    width: 30px;
+    height: 30px;
+}

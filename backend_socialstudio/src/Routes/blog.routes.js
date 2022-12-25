@@ -29,6 +29,32 @@ app.post('/allPosts', async (req, res) => {
     }
 });
 
+app.post("/like", async (req, res) => {
+    let user = req.user._id;
+    let blog = req.body.blog;
+
+    try {
+        let u = await blogModel.findByIdAndUpdate(blog, { $push: { likes: user } });
+        return res.send("succesfully liked");
+    } catch (e) {
+        return res.send(e.message);
+    }
+
+})
+
+app.post("/dislike", async (req, res) => {
+    let user = req.user._id;
+    let blog = req.body.blog;
+
+    try {
+        let u = await blogModel.findByIdAndUpdate(blog, { $pull: { likes: user } });
+        return res.send("succesfully disliked");
+    } catch (e) {
+        return res.send(e.message);
+    }
+
+})
+
 
 
 module.exports = app;

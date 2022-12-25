@@ -13,20 +13,20 @@ import {
 import { getPosts } from '../Redux/homeReducer/actions';
 import PostImage from '../Components/PostImage';
 import { Link } from 'react-router-dom';
+import NewsFeed from '../Components/NewsFeed';
 
 const Home = () => {
 
-    //create a component to map alll the posts.
 
     const { userDetails, token } = useSelector(store => store.auth)
+
     const { allPosts } = useSelector(store => store.home)
 
     const dispatch = useDispatch()
-
     useEffect(() => {
-        dispatch(getUserDetails(token))
-        dispatch(getPosts())
-    }, [dispatch, token]);
+        dispatch(getPosts());
+        dispatch(getUserDetails(token));
+    }, []);
 
 
     return (
@@ -71,26 +71,9 @@ const Home = () => {
                     <PostImage></PostImage>
                     <div id='newsFeed' >
                         {
-                            allPosts.map((ele, i) => {
-                                return <div id='postsCard' key={i}>
-                                    <div className='mainDiv'>
-                                        <div className='cardChild'>
-                                            <img className='profilePic' src={ele.user.avatar} alt="userImg" />
-                                            <Link to={`/singleUser/${ele.user._id}`}> <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text></Link>
-                                        </div>
-
-                                        {
-                                            ele.user._id !== userDetails._id ?
-                                                <AiOutlineUserAdd>haba</AiOutlineUserAdd> : ''
-                                        }
-
-
-                                    </div>
-                                    <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
-                                    <img style={{ borderRadius: '8px', width: '100%' }} src={ele.imageUrl} alt="" />
-                                </div>
-
-                            })
+                            allPosts.map((e,i)=>(
+                                <NewsFeed {...e} key={i}></NewsFeed>
+                            ))
                         }
                     </div>
 

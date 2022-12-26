@@ -5,7 +5,6 @@ let url = 'http://localhost:8000/'
 
 export const getPosts = () => async (dispatch) => {
    let res = await axios.get('http://localhost:8000/blogs/allPosts');
-   console.log(res.data);
    dispatch({ type: GETPOSTS, payload: res.data })
 }
 
@@ -31,7 +30,5 @@ export const getSingleUser = (id, token) => async (dispatch) => {
          token
       }
    })
-   console.log(res.data)
    dispatch({ type: SINGLEUSER, payload: { blogs: res.data.blogs, userDetails: res.data.userDetails } })
-
 }

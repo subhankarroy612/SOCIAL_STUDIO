@@ -34,20 +34,31 @@ app.post("/profile", async (req, res) => {
     }
 })
 
-app.get('/:id/friends', (req, res) => {
+app.post('/follow/:id', async (req, res) => {
+
+    let { id } = req.params;
+    let { _id } = req.user
+
     try {
-
+        await userModel.findByIdAndUpdate(id, { $push: { follow: _id } })
+        return res.send('followed successfully')
     } catch (e) {
-
+        return res.send(e.message)
     }
 })
 
-app.get('/:id/:friendId', (req, res) => {
+app.post('/unfollow/:id', async (req, res) => {
+
+    let { id } = req.params;
+    let { _id } = req.user
+
     try {
-
+        await userModel.findByIdAndUpdate(id, { $pull: { follow: _id } })
+        return res.send('unfollowed successfully')
     } catch (e) {
-
+        return res.send(e.message)
     }
 })
+
 
 module.exports = app;

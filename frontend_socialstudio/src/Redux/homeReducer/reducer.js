@@ -3,7 +3,8 @@ import { GETPOSTS, SINGLEUSER } from "./actionTypes"
 const initState = {
     allPosts: [],
     singleUserBlogs: [],
-    singleUserDetails: []
+    singleUserDetails: [],
+    loadingSingleUserDetails: false
 }
 
 export const homeReducer = (state = initState, action) => {
@@ -15,7 +16,8 @@ export const homeReducer = (state = initState, action) => {
         case SINGLEUSER:
             return {
                 ...state, singleUserBlogs: action.payload.blogs,
-                singleUserDetails: action.payload.userDetails
+                singleUserDetails: action.payload.userDetails,
+                loadingSingleUserDetails: true
             }
         default:
             return state

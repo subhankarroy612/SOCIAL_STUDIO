@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSingleUser } from '../Redux/homeReducer/actions';
 import { useParams } from 'react-router-dom'
 import "../Styles/singleUser.css";
+import axios from 'axios';
+import { useState } from 'react';
+import { Button } from '@chakra-ui/react';
+import { getUserDetails } from '../Redux/authReducer/actions';
 
 function idToDate(id) {
     return new Date(parseInt(id.toString().slice(0, 8), 16) * 1000).toDateString() || null;
@@ -11,13 +15,37 @@ function idToDate(id) {
 const SingleUser = () => {
 
     const dispatch = useDispatch()
-    const { singleUserBlogs, singleUserDetails } = useSelector(s => s.home)
-    const { id } = useParams()
+    const { singleUserBlogs, singleUserDetails, loadingSingleUserDetails } = useSelector(s => s.home)
+    const { userDetails, token, loadingUser } = useSelector(store => store.auth)
+    const { id } = useParams();
+    const [follow, setFollow] = useState(false)
+    const [followers, setFollowers] = useState(0)
+
 
     useEffect(() => {
-        dispatch(getSingleUser(id, localStorage.getItem('authToken')))
+        dispatch(getSingleUser(id, localStorage.getItem('authToken')));
+        dispatch(getUserDetails(token))
     }, []);
-    console.log(singleUserBlogs)
+
+    useEffect(() => {
+        loadingUser && loadingSingleUserDetails && setFollow(singleUserDetails.follow.includes(userDetails._id))
+        loadingSingleUserDetails && setFollowers(singleUserDetails.follow.length)
+    }, [singleUserDetails]);
+
+
+    const handleFollow = async () => {
+        setFollow(!follow)
+        setFollowers(c => follow ? c - 1 : c + 1)
+        try {
+             await axios.post(`http://localhost:8000/users/${follow ? 'unfollow' : 'follow'}/${id}`, {}, {
+                headers: {
+                    token
+                }
+            })
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
 
     return (
         <div className='singleUser'>
@@ -34,7 +62,8 @@ const SingleUser = () => {
                     <p className='flex'>
                         <img className='icon' src="https://cdn-icons-png.flaticon.com/128/3119/3119181.png" alt="" />
                         {singleUserDetails.occupation}</p>
-                    <button className='btn'>follow</button>
+                    <Button onClick={handleFollow} variant='solid' bgColor={'teal'} color='white'>{follow ? 'Unfollow' : 'Follow'}</Button>
+                    <p>Followers: {followers}</p>
                 </div>
             </div>
             <h1>recent posts</h1>

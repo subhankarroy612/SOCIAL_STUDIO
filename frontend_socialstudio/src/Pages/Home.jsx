@@ -6,13 +6,8 @@ import { MdLocationOn } from 'react-icons/md'
 import { RiSuitcaseFill } from 'react-icons/ri'
 import { BsTwitter } from 'react-icons/bs'
 import { BsLinkedin } from 'react-icons/bs'
-import { AiOutlineUserAdd } from 'react-icons/ai'
-import {
-    Text
-} from '@chakra-ui/react'
 import { getPosts } from '../Redux/homeReducer/actions';
 import PostImage from '../Components/PostImage';
-import { Link } from 'react-router-dom';
 import NewsFeed from '../Components/NewsFeed';
 
 const Home = () => {

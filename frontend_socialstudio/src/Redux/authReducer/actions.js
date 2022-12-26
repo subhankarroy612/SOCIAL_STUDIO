@@ -9,7 +9,7 @@ export const register = (details, file) => async (dispatch) => {
 
     console.log(res.data);
 
-    let re = await axios.post('http://localhost:8000/auth/register', {...details, avatar});
+    let re = await axios.post('http://localhost:8000/auth/register', { ...details, avatar });
     dispatch({ type: REGISTER, payload: re.data })
 }
 

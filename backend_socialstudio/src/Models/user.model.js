@@ -8,6 +8,7 @@ const userSchema = new Schema({
     location: { type: String, required: true },
     occupation: { type: String, required: true },
     avatar: { type: String, required: true },
+    follow: { type: [Schema.Types.ObjectId] },
     role: {
         type: String,
         enum: ['admin', 'guest'],

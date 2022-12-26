@@ -7,7 +7,8 @@ const initState = {
     logState: false,
     token: localStorage.getItem('authToken'),
     isAuth: !!localStorage.getItem('authToken'),
-    userDetails: [],
+    userDetails: {},
+    loadingUser: false
 }
 
 export const authReducer = (state = initState, action) => {
@@ -28,12 +29,12 @@ export const authReducer = (state = initState, action) => {
         case LOGOUT:
             localStorage.removeItem('authToken')
             return {
-                ...state, isAuth: false, userDetails: []
+                ...state, isAuth: false, userDetails: {}
             }
         case USERDETAILS:
             return {
-                ...state, userDetails: action.payload
-            }    
+                ...state, userDetails: action.payload, loadingUser: true
+            }
         default:
             return state;
     }

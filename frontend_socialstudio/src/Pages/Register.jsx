@@ -1,15 +1,13 @@
 import React from 'react';
 import '../Styles/register.css'
 import {
-    Alert,
-    AlertIcon,
-    AlertTitle,
     Button,
     FormControl,
     FormLabel,
     HStack,
     Input,
-    Text
+    Text,
+    useToast
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
@@ -20,7 +18,12 @@ const Register = () => {
     const dispatch = useDispatch()
     const { registerState, regState } = useSelector((store) => store.auth)
     const [error, setError] = useState(false)
-    const [file, setFile] = useState('')
+    const [file, setFile] = useState('');
+    const toast = useToast()
+
+
+
+
 
     const [details, setDetails] = useState({
         firstName: '',
@@ -43,8 +46,32 @@ const Register = () => {
             fm.append('file', file)
             fm.append('upload_preset', 'social')
             dispatch(register(details, fm))
+            if (registerState === 'User already exists' || error) {
+                toast({
+                    title: 'Error in this operation',
+                    description: 'Please check for correct details',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+            if (regState) {
+                toast({
+                    title: 'Successfull',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
         } else {
             setError(true)
+            toast({
+                title: 'Error in this operation',
+                description: 'Please check for correct details',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
         }
     }
 
@@ -60,24 +87,15 @@ const Register = () => {
                 <Text id='registerHead' as='b' >Welcome to SOCIAL STUDIO</Text>
 
                 {
-                    regState && <Alert style={{ borderRadius: '20px', height: '40px' }} status='success'>
-                        <AlertIcon />
-                        Signed up Successfully!
-                    </Alert>
+                    regState && toast({
+                        title: 'Successfull',
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true,
+                    })
                 }
 
-                {
-                    registerState === 'Signup Successful' || registerState === "" ? "" : <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
-                        <AlertIcon />
-                        <AlertTitle>User already exists!</AlertTitle>
-                    </Alert>
-                }
-                {
-                    error && <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
-                        <AlertIcon />
-                        <AlertTitle>Please fill all the details!</AlertTitle>
-                    </Alert>
-                }
+      
 
                 <FormControl isRequired>
                     <FormLabel className='label' fontSize='xs'>Name</FormLabel>
@@ -100,10 +118,10 @@ const Register = () => {
 
                     <FormLabel className='label' fontSize='xs'>Upload Picture</FormLabel>
 
-                    <div style={{border:'1px solid black'}}>
+                    <div style={{ border: '1px solid black' }}>
                         <label htmlFor="inputTag">
-                            <div style={{display:'flex', justifyContent:'center'}}>
-                            <AiTwotoneCamera style={{}} size='30px' /> Upload
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <AiTwotoneCamera style={{}} size='30px' /> Upload
                             </div>
                             <br />
                             <input onChange={(e) => handleFile(e)} id="inputTag" type="file" />
@@ -111,7 +129,7 @@ const Register = () => {
                         </label>
                     </div>
 
-                    <Button onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Register</Button>
+                    <Button disabled={regState} onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Register</Button>
                 </FormControl>
 
             </div>

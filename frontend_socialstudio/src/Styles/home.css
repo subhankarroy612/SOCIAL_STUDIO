@@ -1,5 +1,4 @@
 #home {
-  /* margin-top: 10vh; */
   background-image: linear-gradient(black, white);
 }
 
@@ -23,7 +22,7 @@
   background-color: white;
   border-radius: 8px;
   padding: 20px;
-  color: #bbbbbb;
+  color: black;
   height: 350px;
 }
 

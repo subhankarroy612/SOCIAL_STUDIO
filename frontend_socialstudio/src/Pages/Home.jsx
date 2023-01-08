@@ -9,6 +9,7 @@ import { BsLinkedin } from 'react-icons/bs'
 import { getPosts } from '../Redux/homeReducer/actions';
 import PostImage from '../Components/PostImage';
 import NewsFeed from '../Components/NewsFeed';
+import { Text } from '@chakra-ui/react';
 
 const Home = () => {
 
@@ -66,7 +67,7 @@ const Home = () => {
                     <PostImage></PostImage>
                     <div id='newsFeed' >
                         {
-                            allPosts.map((e,i)=>(
+                            allPosts.map((e, i) => (
                                 <NewsFeed {...e} key={i}></NewsFeed>
                             ))
                         }
@@ -76,6 +77,8 @@ const Home = () => {
 
                 <div id='friendList'>
                     <h2 style={{ marginLeft: '1vw', fontWeight: 'bold', color: 'black' }}>Sponsored</h2>
+                    <Text>This is for Sponsored ad.
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut, obcaecati saepe officiis totam vero numquam quos nulla ipsum architecto quo deserunt ex quam culpa neque nobis, non molestiae modi ut!</Text>
                 </div>
             </div>
 

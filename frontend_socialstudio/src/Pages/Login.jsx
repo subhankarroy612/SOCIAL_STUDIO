@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, AlertTitle, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import '../Styles/login.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ const Login = () => {
 
     const dispatch = useDispatch()
     const { isAuth, token, logState } = useSelector(store => store.auth)
+    const toast = useToast()
 
     let [details, setDetails] = useState({
         email: '',
@@ -27,35 +28,43 @@ const Login = () => {
             localStorage.setItem('authToken', token)
         }
     }
-    
-    if(isAuth)
-    return <Navigate to='/' />
+
+    if (isAuth){
+        toast({
+            title: 'Successfull',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+        })
+        return <Navigate to='/' />
+    }
 
     return (
         <div id='login'>
 
-            <div>
-                <div id='loginForm'>
-                    <Text id='registerHead' as='b' >Sign in to your account</Text>
-                    {
-                        logState && <Alert style={{ borderRadius: '20px', height: '40px' }} status='error'>
-                            <AlertIcon />
-                            <AlertTitle>Wrong Credentials</AlertTitle>
-                        </Alert>
-                    }
-                    <FormControl isRequired>
+            {
+                logState &&  toast({
+                    title: 'Wrong Credentials',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
 
-                        <FormLabel className='label'>Email</FormLabel>
-                        <Input name='email' onChange={handleChange} placeholder='Email' />
+            <div className='login1'>
+                <Text id='registerHead' as='b' >Sign in to your account</Text>
 
-                        <FormLabel className='label' >Password</FormLabel>
-                        <Input name='password' onChange={handleChange} placeholder='Password' />
+                <FormControl isRequired>
 
-                        <Button onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Login</Button>
+                    <FormLabel className='label'>Email</FormLabel>
+                    <Input name='email' onChange={handleChange} placeholder='Email' />
 
-                    </FormControl>
-                </div>
+                    <FormLabel className='label' >Password</FormLabel>
+                    <Input name='password' onChange={handleChange} placeholder='Password' />
 
+                    <Button isLoading={isAuth} onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Login</Button>
+
+                </FormControl>
             </div>
 
             <div id='loginImg' >

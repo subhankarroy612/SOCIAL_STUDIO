@@ -5,31 +5,40 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../Redux/authReducer/actions';
 import { Navigate } from 'react-router-dom';
 
-
 const Login = () => {
 
     const dispatch = useDispatch()
     const { isAuth, token, logState } = useSelector(store => store.auth)
     const toast = useToast()
 
+
     let [details, setDetails] = useState({
         email: '',
         password: '',
     })
+
 
     const handleChange = (e) => {
         const { name, value } = e.target
         setDetails({ ...details, [name]: value })
     }
 
-    const handleClick = () => {
-        dispatch(login(details))
+    const handleClick = async () => {
+        await dispatch(login(details))
         if (isAuth) {
             localStorage.setItem('authToken', token)
         }
+        if (logState) {
+            toast({
+                title: 'Wrong Credentials',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
+        }
     }
 
-    if (isAuth){
+    if (isAuth) {
         toast({
             title: 'Successfull',
             status: 'success',
@@ -41,15 +50,6 @@ const Login = () => {
 
     return (
         <div id='login'>
-
-            {
-                logState &&  toast({
-                    title: 'Wrong Credentials',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            }
 
             <div className='login1'>
                 <Text id='registerHead' as='b' >Sign in to your account</Text>

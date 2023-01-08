@@ -71,7 +71,7 @@ const SingleUser = () => {
                 {
                     singleUserBlogs.map((e, i) => (
                         <div key={i}>
-                            <img src={e.imageUrl} alt="" />
+                            {e.imageUrl &&  <img src={e.imageUrl} alt="" />}
                             <div>
                                 <h2>{e.description}</h2>
                                 <p>posted on {idToDate(e._id)}</p>

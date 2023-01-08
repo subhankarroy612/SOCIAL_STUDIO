@@ -20,6 +20,7 @@ export const authReducer = (state = initState, action) => {
                 regState: action.payload === 'Signup Successful' ? true : false
             }
         case LOGIN:
+            if(action.payload !== 'Wrong Credentials')
             localStorage.setItem('authToken', action.payload)
             return {
                 ...state, token: action.payload,

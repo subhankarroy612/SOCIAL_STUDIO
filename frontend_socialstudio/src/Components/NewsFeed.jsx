@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import { MdInsertComment } from "react-icons/md"
 import { useSelector } from 'react-redux'
 
 export default function NewsFeed(ele) {
@@ -54,20 +55,27 @@ export default function NewsFeed(ele) {
                             <Link to={`/singleUser/${ele.user._id}`}> <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text></Link>
                         </div>
 
-                        <button
-                            className='like'
-                            onClick={likeOrDislike}
-                        >
-                            <img
-                                src={like ? "https://img.icons8.com/ios/2x/hearts.png" : "https://img.icons8.com/emoji/2x/red-heart.png"}
-                                alt="" />
-                            {nofLikes}
-                        </button>
+
 
 
                     </div>
                     <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
                     <img style={{ borderRadius: '8px', width: '100%' }} src={ele.imageUrl} alt="" />
+                    <div className='postButtons'>
+                        <button
+                            className='like'
+                            onClick={likeOrDislike}
+                        >
+                            <img src={like ? "https://img.icons8.com/ios/2x/hearts.png" : "https://img.icons8.com/emoji/2x/red-heart.png"} alt="" />
+                            {nofLikes}
+                        </button>
+                        <button>
+                            <MdInsertComment fontSize={"30px"}></MdInsertComment>
+                            {0}
+                        </button>
+                
+
+                    </div>
                 </div>
 
             }

@@ -124,10 +124,33 @@
   height: 350px;
 }
 
+.postButtons{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 10px;
+}
+
 .like img {
-  width: 50px;
+  height: 35px;
 }
 .like img:hover {
   transform: rotate(360deg) scale(1.1);
   transition: 0.8s;
+}
+@media screen and (max-width: 800px) {
+  .userAlign{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #userDetails,#friendList{
+    display: none;
+  }
+  #home>div{
+  grid-template-columns: 1fr;
+
+  }
 }

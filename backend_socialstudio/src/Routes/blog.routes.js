@@ -1,6 +1,5 @@
 const express = require('express');
 const blogModel = require('../Models/blog.model');
-const jwt = require('jsonwebtoken');
 const AuthMiddleware = require('../Middlewares/AuthMiddleware');
 require('dotenv').config()
 
@@ -8,7 +7,7 @@ const app = express.Router()
 
 app.get('/allPosts', async (req, res) => {
     try {
-        await blogModel.find().populate("user")
+        await blogModel.find().populate("user").populate("comment")
             .then(r => res.send(r))
             .catch(e => res.send(e.message));
     } catch (e) {
@@ -54,7 +53,6 @@ app.post("/dislike", async (req, res) => {
     }
 
 })
-
 
 
 module.exports = app;

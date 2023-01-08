@@ -21,7 +21,6 @@ const SingleUser = () => {
     const [follow, setFollow] = useState(false)
     const [followers, setFollowers] = useState(0)
 
-
     useEffect(() => {
         dispatch(getSingleUser(id, localStorage.getItem('authToken')));
         dispatch(getUserDetails(token))

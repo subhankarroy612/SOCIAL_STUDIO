@@ -4,8 +4,9 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    position: fixed;
+    position: sticky;
     top: 0px;
+    backdrop-filter: blur(20px);
 }
 #NavbarButtons{
     width: 180px;

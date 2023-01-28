@@ -16,8 +16,7 @@ import { AiTwotoneCamera } from 'react-icons/ai'
 
 const Register = () => {
     const dispatch = useDispatch()
-    const { registerState, regState } = useSelector((store) => store.auth)
-    const [error, setError] = useState(false)
+    const { regState } = useSelector((store) => store.auth)
     const [file, setFile] = useState('');
     const toast = useToast();
     const [loading, setLoading] = useState(false)
@@ -43,7 +42,6 @@ const Register = () => {
     const handleClick = () => {
         setLoading(true)
         if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && file) {
-            setError(false)
             let fm = new FormData()
             fm.append('file', file)
             fm.append('upload_preset', 'social')
@@ -70,7 +68,6 @@ const Register = () => {
             })
         } else {
             setLoading(false)
-            setError(true)
             toast({
                 title: 'Error in this operation',
                 description: 'Please check for correct details',

@@ -22,7 +22,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getPosts());
         dispatch(getUserDetails(token));
-    }, []);
+    }, [dispatch, token]);
 
 
     return (

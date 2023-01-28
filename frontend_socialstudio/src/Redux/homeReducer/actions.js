@@ -1,7 +1,7 @@
 import axios from "axios"
+import { url } from "../../Components/url";
 import { GETPOSTS, SINGLEUSER } from "./actionTypes";
-
-let url = 'http://localhost:8000/'
+let urli = 'http://localhost:8000/'
 
 export const getPosts = () => async (dispatch) => {
    let res = await axios.get('http://localhost:8000/blogs/allPosts');
@@ -13,9 +13,9 @@ export const setPosts = (fm, obj, token) => async (dispatch) => {
       if (fm.get("file")) {
          let res = await axios.post("https://api.cloudinary.com/v1_1/doknlrxsq/image/upload", fm);
          let imageUrl = res.data.secure_url
-         await axios.post('http://localhost:8000/blogs/allPosts', { ...obj, imageUrl }, { headers: { token } });
+         await axios.post(url + '/blogs/allPosts', { ...obj, imageUrl }, { headers: { token } });
       } else
-         await axios.post('http://localhost:8000/blogs/allPosts', { ...obj, }, { headers: { token } });
+         await axios.post(url + '/blogs/allPosts', { ...obj, }, { headers: { token } });
       dispatch(getPosts())
       return true
    } catch (e) {
@@ -24,7 +24,7 @@ export const setPosts = (fm, obj, token) => async (dispatch) => {
 }
 
 export const getSingleUser = (id, token) => async (dispatch) => {
-   let res = await axios.get(url + 'users/' + id, {
+   let res = await axios.get(urli + 'users/' + id, {
       headers: {
          token
       }

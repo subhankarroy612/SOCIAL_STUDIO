@@ -6,7 +6,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { MdInsertComment } from "react-icons/md"
 import { useSelector } from 'react-redux'
-
+import { url } from './url'
 
 let prevtime = {};
 
@@ -26,7 +26,7 @@ export default function NewsFeed(ele) {
     const likeOrDislike = async () => {
         if (like)
             try {
-                await axios.post("http://localhost:8000/blogs/like", { blog: ele._id }, {
+                await axios.post(url + "/blogs/like", { blog: ele._id }, {
                     headers: { token }
                 });
                 setNlikes(c => c + 1)
@@ -37,7 +37,7 @@ export default function NewsFeed(ele) {
 
         else
             try {
-                await axios.post("http://localhost:8000/blogs/dislike", { blog: ele._id }, {
+                await axios.post(url + "/blogs/dislike", { blog: ele._id }, {
                     headers: { token }
                 });
                 setNlikes(c => c - 1)

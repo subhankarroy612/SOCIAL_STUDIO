@@ -24,6 +24,8 @@
   padding: 20px;
   color: black;
   height: 350px;
+  position: sticky;
+  top: 11vh;
 }
 
 .profilePic {
@@ -121,6 +123,8 @@
   border-radius: 8px;
   padding: 20px;
   height: 350px;
+  position: sticky;
+  top: 11vh;
 }
 
 .postButtons{

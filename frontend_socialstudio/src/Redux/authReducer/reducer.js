@@ -8,7 +8,8 @@ const initState = {
     token: localStorage.getItem('authToken'),
     isAuth: !!localStorage.getItem('authToken'),
     userDetails: {},
-    loadingUser: false
+    loadingUser: false,
+    userId: ''
 }
 
 export const authReducer = (state = initState, action) => {
@@ -20,8 +21,8 @@ export const authReducer = (state = initState, action) => {
                 regState: action.payload === 'Signup Successful' ? true : false
             }
         case LOGIN:
-            if(action.payload !== 'Wrong Credentials')
-            localStorage.setItem('authToken', action.payload)
+            if (action.payload !== 'Wrong Credentials')
+                localStorage.setItem('authToken', action.payload)
             return {
                 ...state, token: action.payload,
                 logState: action.payload === 'Wrong Credentials' ? true : false,
@@ -34,7 +35,7 @@ export const authReducer = (state = initState, action) => {
             }
         case USERDETAILS:
             return {
-                ...state, userDetails: action.payload, loadingUser: true
+                ...state, userDetails: action.payload, loadingUser: true,
             }
         default:
             return state;

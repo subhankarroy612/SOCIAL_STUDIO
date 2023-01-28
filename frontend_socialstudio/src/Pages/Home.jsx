@@ -28,7 +28,7 @@ const Home = () => {
     return (
         <div id='home'>
 
-            <div>
+            <div style={{position:'relative'}}>
                 <div id='userDetails'>
                     <div className='userAlign'>
                         <img className='profilePic' src={userDetails.avatar} alt="proPic" />
@@ -67,7 +67,7 @@ const Home = () => {
                     <PostImage></PostImage>
                     <div id='newsFeed' >
                         {
-                            allPosts.map((e, i) => (
+                            allPosts && allPosts.map((e, i) => (
                                 <NewsFeed {...e} i={i} key={i}></NewsFeed>
                             ))
                         }
@@ -78,7 +78,7 @@ const Home = () => {
                 <div id='friendList'>
                     <h2 style={{ marginLeft: '1vw', fontWeight: 'bold', color: 'black' }}>Sponsored</h2>
                     <Text>This is for Sponsored ad.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut, obcaecati saepe officiis totam vero numquam quos nulla ipsum architecto quo deserunt ex quam culpa neque nobis, non molestiae modi ut!</Text>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut, obcaecati saepe officiis totam vero numquam quos nulla ipsum architecto quo </Text>
                 </div>
             </div>
 

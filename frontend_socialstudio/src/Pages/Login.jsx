@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import '../Styles/login.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../Redux/authReducer/actions';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
     const dispatch = useDispatch()
     const { isAuth, token, logState } = useSelector(store => store.auth)
-    const toast = useToast()
+    const toast = useToast();
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
     let [details, setDetails] = useState({
         email: '',
@@ -23,33 +25,31 @@ const Login = () => {
     }
 
     const handleClick = () => {
-        dispatch(login(details))
-        if (isAuth) {
-            localStorage.setItem('authToken', token)
-        }
-    }
-
-    if (isAuth){
-        toast({
-            title: 'Successfull',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        })
-        return <Navigate to='/' />
-    }
-
-    return (
-        <div id='login'>
-
-            {
-                logState &&  toast({
-                    title: 'Wrong Credentials',
+        setLoading(true)
+        dispatch(login(details)).then((r) => {
+            setLoading(false)
+            if (r) {
+                toast({
+                    title: 'Successfull!',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
+                navigate('/')
+            } else {
+                toast({
+                    title: 'Wrong credentials!',
                     status: 'error',
                     duration: 5000,
                     isClosable: true,
                 })
             }
+        })
+    }
+
+    return (
+        <div id='login'>
+
 
             <div className='login1'>
                 <Text id='registerHead' as='b' >Sign in to your account</Text>
@@ -62,7 +62,7 @@ const Login = () => {
                     <FormLabel className='label' >Password</FormLabel>
                     <Input name='password' onChange={handleChange} placeholder='Password' />
 
-                    <Button isLoading={isAuth} onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Login</Button>
+                    <Button isLoading={loading} loadingText='Submitting' onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Login</Button>
 
                 </FormControl>
             </div>

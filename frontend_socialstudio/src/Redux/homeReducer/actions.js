@@ -17,8 +17,7 @@ export const setPosts = (fm, obj, token) => async (dispatch) => {
       } else
          await axios.post('http://localhost:8000/blogs/allPosts', { ...obj, }, { headers: { token } });
       dispatch(getPosts())
-
-
+      return true
    } catch (e) {
       console.log(e.message);
    }

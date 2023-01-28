@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     Input,
     Button,
+    useToast,
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import { FiImage } from 'react-icons/fi';
@@ -16,12 +17,29 @@ const PostImage = () => {
     const [img, setImg] = useState("");
     let [description, setD] = useState("")
     const dispatch = useDispatch();
+    const toast = useToast();
 
     const upload = async () => {
         let fm = new FormData();
         fm.append("file", img);
         fm.append("upload_preset", "social");
-        dispatch(setPosts(fm, { description }, token));
+        dispatch(setPosts(fm, { description }, token)).then((r) => {
+            if (r) {
+                toast({
+                    title: 'Posted successfully!',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+        }).catch((err) => {
+            toast({
+                title: 'Unable to post!',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
+        });
         setFile(false);
     }
 

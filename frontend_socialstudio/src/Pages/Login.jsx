@@ -1,15 +1,14 @@
 import { Button, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import '../Styles/login.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login } from '../Redux/authReducer/actions';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
     const dispatch = useDispatch()
-    const { isAuth, token, logState } = useSelector(store => store.auth)
     const toast = useToast();
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)

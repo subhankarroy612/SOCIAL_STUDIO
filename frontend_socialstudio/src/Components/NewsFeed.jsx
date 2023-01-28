@@ -52,7 +52,7 @@ export default function NewsFeed(ele) {
     useEffect(() => {
         let arr = ele?.likes || [];
         setLike(!arr.includes(userDetails._id));
-    }, [])
+    }, [ele?.likes, userDetails._id])
 
     return (
         <div>

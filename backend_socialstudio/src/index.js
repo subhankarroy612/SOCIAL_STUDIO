@@ -20,5 +20,5 @@ app.get('/', (req, res) => res.send('API Works!'));
 mongoose.connect(process.env.URL).then(() => {
     app.listen(process.env.PORT, () => {
        console.log(`listening on port http://localhost:${process.env.PORT}`);
-    })
+    }).setTimeout(15000);
 })

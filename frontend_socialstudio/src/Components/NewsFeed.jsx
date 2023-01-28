@@ -7,7 +7,17 @@ import axios from 'axios'
 import { MdInsertComment } from "react-icons/md"
 import { useSelector } from 'react-redux'
 
+
+let prevtime = {};
+
+
 export default function NewsFeed(ele) {
+    function throtler(cb) {
+        if ((Date.now() - prevtime[ele.i]) / 1000 < 5)
+            return;
+        prevtime[ele.i] = Date.now();
+        cb();
+    }
 
     const [like, setLike] = useState();
     const { token, userDetails } = useSelector((store) => store.auth);
@@ -55,16 +65,13 @@ export default function NewsFeed(ele) {
                             <Link to={`/singleUser/${ele.user._id}`}> <Text style={{ marginLeft: '1vw' }} fontSize='sm' as='b'>{ele.user.firstName}</Text></Link>
                         </div>
 
-
-
-
                     </div>
                     <Text style={{ marginBottom: '2vh' }} fontSize='sm'>{ele.description}</Text >
                     <img style={{ borderRadius: '8px', width: '100%' }} src={ele.imageUrl} alt="" />
                     <div className='postButtons'>
                         <button
                             className='like'
-                            onClick={likeOrDislike}
+                            onClick={() => throtler(likeOrDislike)}
                         >
                             <img src={like ? "https://img.icons8.com/ios/2x/hearts.png" : "https://img.icons8.com/emoji/2x/red-heart.png"} alt="" />
                             {nofLikes}
@@ -73,7 +80,7 @@ export default function NewsFeed(ele) {
                             <MdInsertComment fontSize={"30px"}></MdInsertComment>
                             {0}
                         </button>
-                
+
 
                     </div>
                 </div>

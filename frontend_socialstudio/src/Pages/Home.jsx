@@ -68,7 +68,7 @@ const Home = () => {
                     <div id='newsFeed' >
                         {
                             allPosts.map((e, i) => (
-                                <NewsFeed {...e} key={i}></NewsFeed>
+                                <NewsFeed {...e} i={i} key={i}></NewsFeed>
                             ))
                         }
                     </div>

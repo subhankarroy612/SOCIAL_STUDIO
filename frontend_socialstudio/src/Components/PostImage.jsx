@@ -22,6 +22,7 @@ const PostImage = () => {
         fm.append("file", img);
         fm.append("upload_preset", "social");
         dispatch(setPosts(fm, { description }, token));
+        setFile(false);
     }
 
     return (

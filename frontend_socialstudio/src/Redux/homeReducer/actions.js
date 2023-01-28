@@ -5,7 +5,7 @@ let url = 'http://localhost:8000/'
 
 export const getPosts = () => async (dispatch) => {
    let res = await axios.get('http://localhost:8000/blogs/allPosts');
-   dispatch({ type: GETPOSTS, payload: res.data })
+   dispatch({ type: GETPOSTS, payload: res.data?.reverse() })
 }
 
 export const setPosts = (fm, obj, token) => async (dispatch) => {

@@ -1,10 +1,9 @@
 import axios from "axios"
 import { url } from "../../Components/url";
 import { GETPOSTS, SINGLEUSER } from "./actionTypes";
-let urli = 'http://localhost:8000/'
 
 export const getPosts = () => async (dispatch) => {
-   let res = await axios.get('http://localhost:8000/blogs/allPosts');
+   let res = await axios.get(url + '/blogs/allPosts');
    dispatch({ type: GETPOSTS, payload: res.data?.reverse() })
 }
 
@@ -24,7 +23,7 @@ export const setPosts = (fm, obj, token) => async (dispatch) => {
 }
 
 export const getSingleUser = (id, token) => async (dispatch) => {
-   let res = await axios.get(urli + 'users/' + id, {
+   let res = await axios.get(url + '/users/' + id, {
       headers: {
          token
       }

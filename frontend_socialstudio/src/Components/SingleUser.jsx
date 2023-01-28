@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { getUserDetails } from '../Redux/authReducer/actions';
+import { url } from './url';
 
 function idToDate(id) {
     return new Date(parseInt(id.toString().slice(0, 8), 16) * 1000).toDateString() || null;
@@ -36,7 +37,7 @@ const SingleUser = () => {
         setFollow(!follow)
         setFollowers(c => follow ? c - 1 : c + 1)
         try {
-             await axios.post(`http://localhost:8000/users/${follow ? 'unfollow' : 'follow'}/${id}`, {}, {
+            await axios.post(url + `/users/${follow ? 'unfollow' : 'follow'}/${id}`, {}, {
                 headers: {
                     token
                 }
@@ -70,7 +71,7 @@ const SingleUser = () => {
                 {
                     singleUserBlogs.map((e, i) => (
                         <div key={i}>
-                            {e.imageUrl &&  <img src={e.imageUrl} alt="" />}
+                            {e.imageUrl && <img src={e.imageUrl} alt="" />}
                             <div>
                                 <h2>{e.description}</h2>
                                 <p>posted on {idToDate(e._id)}</p>

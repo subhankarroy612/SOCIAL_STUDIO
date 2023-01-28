@@ -19,7 +19,8 @@ const Register = () => {
     const { registerState, regState } = useSelector((store) => store.auth)
     const [error, setError] = useState(false)
     const [file, setFile] = useState('');
-    const toast = useToast()
+    const toast = useToast();
+    const [loading, setLoading] = useState(false)
 
 
 
@@ -40,30 +41,35 @@ const Register = () => {
     }
 
     const handleClick = () => {
+        setLoading(true)
         if (details.firstName && details.lastName && details.email && details.password && details.location && details.occupation && file) {
             setError(false)
             let fm = new FormData()
             fm.append('file', file)
             fm.append('upload_preset', 'social')
-            dispatch(register(details, fm))
-            if (registerState === 'User already exists' || error) {
-                toast({
-                    title: 'Error in this operation',
-                    description: 'Please check for correct details',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            }
-            if (regState) {
-                toast({
-                    title: 'Successfull',
-                    status: 'success',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            }
+            dispatch(register(details, fm)).then((r) => {
+                if (r) {
+                    setLoading(false)
+                    toast({
+                        title: 'Successfull',
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true,
+                    })
+                } else {
+                    setLoading(false)
+                    toast({
+                        title: 'Error in this operation',
+                        description: 'Please check for correct details',
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    })
+                }
+
+            })
         } else {
+            setLoading(false)
             setError(true)
             toast({
                 title: 'Error in this operation',
@@ -85,17 +91,6 @@ const Register = () => {
 
             <div>
                 <Text id='registerHead' as='b' >Welcome to SOCIAL STUDIO</Text>
-
-                {
-                    regState && toast({
-                        title: 'Successfull',
-                        status: 'success',
-                        duration: 5000,
-                        isClosable: true,
-                    })
-                }
-
-      
 
                 <FormControl isRequired>
                     <FormLabel className='label' fontSize='xs'>Name</FormLabel>
@@ -129,7 +124,12 @@ const Register = () => {
                         </label>
                     </div>
 
-                    <Button disabled={regState} onClick={handleClick} marginTop='2vh' size='sm' colorScheme='linkedin'>Register</Button>
+                    <Button
+                        isLoading={loading}
+                        loadingText='Submitting'
+                        disabled={regState}
+                        onClick={handleClick}
+                        marginTop='2vh' size='sm' colorScheme='linkedin'>Register</Button>
                 </FormControl>
 
             </div>

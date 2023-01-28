@@ -9,6 +9,11 @@ export const register = (details, file) => async (dispatch) => {
 
         let re = await axios.post('http://localhost:8000/auth/register', { ...details, avatar });
         dispatch({ type: REGISTER, payload: re.data })
+        if (re.data === 'Signup Successful') {
+            return true
+        } else {
+            return false
+        }
     } catch (e) {
 
     }
@@ -16,10 +21,13 @@ export const register = (details, file) => async (dispatch) => {
 
 export const login = (details) => async (dispatch) => {
     let res = await axios.post('http://localhost:8000/auth/login', details);
-    if (res.data.token)
+    if (res.data.token) {
         dispatch({ type: LOGIN, payload: res.data.token, userDetails: [res.data.avatar, res.data.email, res.data.occupation, res.data.name, res.data.location] })
-    else
+        return true
+    } else {
         dispatch({ type: LOGIN, payload: res.data })
+        return false
+    }
 }
 
 export const getUserDetails = (token) => async (dispatch) => {

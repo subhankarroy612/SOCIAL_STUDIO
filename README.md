@@ -42,6 +42,28 @@ comfort.
    * React Icons
    * Git
 
+- ### Register 
+<img src="https://i.imgur.com/i5OvYIX.png" alt="Register" />
 
+- ### Login 
+<img src="https://i.imgur.com/qBG54M6.png" alt="Login" />
+
+- ### Homepage 
+<img src="https://i.imgur.com/Xbfc6Ay.png" alt="Home" />
+
+- ### Upload Image 
+<img src="https://i.imgur.com/0gKJ8un.png" alt="Upload" />
+
+- ### Image posted 
+<img src="https://i.imgur.com/wPzY6FG.png" alt="posted" />
+
+- ### Like and Dislike feature 
+<img src="https://i.imgur.com/x8Ps1Sq.png" alt="like" />
+
+- ### Singleuser Details
+<img src="https://i.imgur.com/1sb2E9q.png" alt="single" />
+
+- ### Follow and Unfollow feature
+<img src="https://i.imgur.com/bPj3meG.png" alt="follow" />
 
 
